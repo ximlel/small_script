@@ -13,8 +13,8 @@ from selenium.common.exceptions import NoSuchElementException
 import requests
 
 INIT=1
-N=115
-NAME_IN_URL='play_13878_52_1'
+N=121
+NAME_IN_URL='play_20766_47_1'
 
 if not os.path.exists(NAME_IN_URL):
     os.makedirs(NAME_IN_URL)
@@ -53,6 +53,7 @@ while i<=N:
     try:
         down = driver.find_element_by_id('jp_audio_0')
     except NoSuchElementException:
+#        print('No jp_audio_0 in object ',i,'!')
         continue
     else:
         down_url[i-INIT] = str(down.get_attribute('src'))
@@ -62,7 +63,7 @@ while i<=N:
 driver.close()
 for i in range(INIT,N+1):
     mp3_down = requests.get(down_url[i-INIT],headers=head)
-    #mp3_down.urlretrieve(down_url,'./'+str(i)+'.mp3')
+    #mp3_down.urlretrieve(down_url[i-INIT],str(i)+'.mp3')
     with open(str(i)+'.mp3','wb') as f:
         f.write(mp3_down.content)
         print('Creat: '+str(i)+'.mp3!')
