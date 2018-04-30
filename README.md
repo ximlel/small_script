@@ -1,2 +1,2 @@
 # small_script
-Some small script
+Some small scripts.
